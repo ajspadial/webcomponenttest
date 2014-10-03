@@ -1,0 +1,24 @@
+{
+  "name": "hexagon",
+  "version": "0.0.0",
+  "authors": [
+    "Antonio Jesús Sánchez Padial <antonio@spadial.com>"
+  ],
+  "description": "SVG web component using polymer",
+  "main": "hexagon.html",
+  "keywords": [
+    "svg",
+    "hexagon"
+  ],
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.4.2"
+  }
+}
