@@ -66,6 +66,7 @@
 	//cells.push(polygon(6, cx, cy, this.r));
 	var hexagon = document.importNode(this.$.hexagon.content, true);
         hexagon.d = polygon(6, cx, cy, this.r);
+        console.log(hexagon);
         // Add cells to inner DOM
         this.$.svg.appendChild(hexagon);
 //        console.log(hexagon.content);
