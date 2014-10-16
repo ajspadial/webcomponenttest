@@ -1,0 +1,78 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<polymer-element name="ajspadial-hexboard" attributes="r fill stroke rows columns width height">
+  <template>
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" height="{{height}}" width="{{width}}">
+      <template id="hexagon">
+        <path d="" fill="{{fill}}" stroke="{{stroke}}" ></path>
+      </template>
+    </svg>
+  </template>
+    <script>
+        var apotheme = function(r) {
+          var angle = Math.PI / 6;
+          return r * Math.cos(angle);      
+        };
+
+        var getSide = function(sides, radius) {
+          var angle = 2 * Math.PI / sides;
+          return Math.SQRT2 * radius * Math.sqrt(1 - Math.cos(angle));
+        };
+
+        var polygon = function polygon(sides, x, y, radius) {
+          var angle = 2 * Math.PI / sides;
+          var base_angle = 3./2 * Math.PI - angle / 2.;
+          var x0_relative = radius * Math.cos(base_angle);
+          var y0_relative = radius * Math.sin(base_angle);
+          var path = "M" + x + "," + y + "m" + x0_relative + "," + y0_relative;
+	  var side = getSide(sides, radius);
+          angle2 = Math.PI - angle;
+          for(var i = 0; i < sides; i++) {
+            x = side * Math.cos(i * angle);
+            y = side * Math.sin(i * angle);
+            path = path + "l" + x + "," + y;
+          }
+          path = path + "Z";
+          return path; 
+        };
+
+        Polymer({
+          fill: '#fff',
+          stroke: '#000',
+          r : 20,
+	  columns: 4,
+	  rows:4,
+	  width: 100,
+          height: 100,
+          ready: function() {
+            var getYFromRow = function(radius, row, col) {
+              var y = 2 * apotheme(radius) * row; 
+              y += col%2 ? apotheme(radius) : 0;
+              return y;
+            };
+    
+            var getXFromColumn = function(radius, col) {
+      var x = col * (radius + getSide(6,radius)/2); 
+      return x;
+    };
+
+    //var cells = [];
+    console.log(this.$);
+    var hexagon_template = this.$.hexagon;
+    for (var i = 0; i < this.columns; i ++) {
+      for (var j = 0; j < this.rows; j++) {
+	var cx = getXFromColumn(this.r, i);
+	var cy = getYFromRow(this.r, j, i);
+	//cells.push(polygon(6, cx, cy, this.r));
+	var hexagon = document.importNode(this.$.hexagon.content, true);
+        hexagon.d = polygon(6, cx, cy, this.r);
+        // Add cells to inner DOM
+        this.$.svg.appendChild(hexagon);
+//        console.log(hexagon.content);
+      };
+    };
+  },
+});
+    </script>
+</polymer-template>
+

@@ -1,0 +1,28 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<script src="Hexagon.js"></script>
+
+<polymer-element name="ajspadial-hexagon" attributes="cx cy r fill stroke">
+    <template>
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <path d="{{path}}" fill="{{fill}}" stroke="{{stroke}}" ></path>
+        </svg>
+    </template>
+    <script>
+        Polymer({
+          fill: '#fff',
+          stroke: '#000',
+          cx: 0,
+          cy: 0,
+          r : 20,
+          path: '',
+          ready: function() {
+            console.log("Ready ...");
+            this.shape = new Hexagon(this.cx, this.cy, this.r);
+            console.log(this.shape);
+            this.path = this.shape.path();
+            console.log(this.path);
+          },
+        });
+    </script>
+</polymer-template>
+

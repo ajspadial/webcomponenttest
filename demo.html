@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 1. Load platform support before any code that touches the DOM. -->
+        <script src="./bower_components/platform/platform.js"></script>
+        <!-- 2. Load the components using a HTML Import -->
+        <link rel="import" href="./hexagon.html">
+        <link rel="import" href="./board.html">
+    </head>
+    <body>
+        <!-- 3.- Declare the element by its tag. -->
+        <!--
+        <svg height="400" width="600">
+            <foreignObject height="400" width="600">
+                <ajspadial-hexagon cx="100" cy="100" r="50"></ajspadial-hexagon>
+            </foreignObject>
+        </svg>
+        -->
+        <ajspadial-hexboard height="400" width="600" columns="20" rows="20" r="40">
+        </ajspadial-hexboard>
+    </body>
+</html>
